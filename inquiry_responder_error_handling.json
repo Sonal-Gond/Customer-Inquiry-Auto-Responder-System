@@ -1,0 +1,317 @@
+{
+  "name": "inquiry_responder_error_handling",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        -256,
+        -96
+      ],
+      "id": "357b1611-7ca5-4351-a066-487e91754921",
+      "name": "Error Trigger"
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "#customer-inquiry",
+          "mode": "name"
+        },
+        "text": "=Error occurred in Workflow:\nerror id:{{ $json.execution.id }}\nerror message: {{ $json.execution.error.message }}\nLastNodeExecuted : {{ $json.execution.lastNodeExecuted }}\nmode : {{ $json.execution.mode }}\nworkflow id: {{ $json.workflow.id }}\nerror workflow name :{{ $json.workflow.name }} ",
+        "otherOptions": {}
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.4,
+      "position": [
+        -48,
+        -176
+      ],
+      "id": "7c24e7f8-fd8d-44c1-b7c0-7e50d5258f30",
+      "name": "Send a message",
+      "webhookId": "a48f8048-c891-44a4-86e1-bf1a061351d5",
+      "credentials": {
+        "slackApi": {
+          "id": "ekJzRR6RASxiEuDX",
+          "name": "Slack account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5192f90f-e377-477f-989c-335a39dd7fc3",
+              "name": "Timestamp",
+              "value": "={{ new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }) }}",
+              "type": "string"
+            },
+            {
+              "id": "c2ac034b-3a8b-4fd4-9b4b-c171613bf440",
+              "name": "Status",
+              "value": "Failed",
+              "type": "string"
+            },
+            {
+              "id": "15e3040d-cde0-447b-9a0a-d994b5ab5b11",
+              "name": "Node_name",
+              "value": "={{ $json.execution.executionContext.triggerNode.name }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        0,
+        48
+      ],
+      "id": "42784be5-e2b4-4237-8506-6eb9d6ef8199",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1S5zKWmLzw2sZZK_3KMfaMxzn_a5NZGHwiy4ph8dlkDo",
+          "mode": "list",
+          "cachedResultName": "Inquiry_Data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1S5zKWmLzw2sZZK_3KMfaMxzn_a5NZGHwiy4ph8dlkDo/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1710864233,
+          "mode": "list",
+          "cachedResultName": "Log Detail",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1S5zKWmLzw2sZZK_3KMfaMxzn_a5NZGHwiy4ph8dlkDo/edit#gid=1710864233"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Timestamp",
+              "displayName": "Timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Node_name",
+              "displayName": "Node_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        224,
+        64
+      ],
+      "id": "c680ef6d-3629-4cb0-addb-8003f8ed0def",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "jlKm2nGVNcSMQ1dn",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "68916147-6988-4542-9ffa-aa67468f524a",
+              "name": "Timestamp",
+              "value": "={{ new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }) }}",
+              "type": "string"
+            },
+            {
+              "id": "138a9896-fd51-4c5b-a94e-705fb7742764",
+              "name": "Status",
+              "value": "Succes (Error notification sent)",
+              "type": "string"
+            },
+            {
+              "id": "83828de9-98ba-4144-9b19-735d24531bd1",
+              "name": "Node_name",
+              "value": "Slack",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        176,
+        -192
+      ],
+      "id": "2f5fe29f-bc8f-4183-9f6b-8cf75ed33e90",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1S5zKWmLzw2sZZK_3KMfaMxzn_a5NZGHwiy4ph8dlkDo",
+          "mode": "list",
+          "cachedResultName": "Inquiry_Data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1S5zKWmLzw2sZZK_3KMfaMxzn_a5NZGHwiy4ph8dlkDo/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1710864233,
+          "mode": "list",
+          "cachedResultName": "Log Detail",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1S5zKWmLzw2sZZK_3KMfaMxzn_a5NZGHwiy4ph8dlkDo/edit#gid=1710864233"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Timestamp",
+              "displayName": "Timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Node_name",
+              "displayName": "Node_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        368,
+        -176
+      ],
+      "id": "ad716dec-0fca-427a-8a3c-4c9f708f5a63",
+      "name": "Append row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "jlKm2nGVNcSMQ1dn",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "00ae8280-0bfc-416e-9f6f-75035e0bbb9a",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "dc2ead7cb487f5fc2c13d150413e6b29683b8c8b2203ff3bd68e99a2bda02a39"
+  },
+  "id": "5eUMK1Vimlo_ao8-D1Z37",
+  "tags": []
+}
