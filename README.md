@@ -1,17 +1,14 @@
 ## ⚙️ How to Set Up This Workflow
 
 1. Download `customer_auto_responde_system.json` from this repository  
-2. Open n8n and click **Import workflow**  
-3. Upload the JSON file  
-4. Create credentials for:
-   - Google Sheets  
-   - Gmail  
-   - Slack  
-5. Open each node and attach the correct credentials  
-6. Create a Google Sheet with the required columns  
-7. Activate the workflow  
-8. Copy the Webhook URL  
-9. Send test data using Postman or a form
+2. Open n8n    
+3. Click Workflows (left sidebar)
+4. Click + Add workflow
+5. Click ⋮ (three dots) on top-right
+7. Click Import from file
+8. Select customer_auto_responde_system.json
+9. Click Import
+Your workflow will now appear in n8n.
 
 
 Workflow Image :
