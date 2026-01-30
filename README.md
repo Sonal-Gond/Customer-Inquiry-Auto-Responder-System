@@ -1,6 +1,6 @@
 ## ⚙️ How to Set Up This Workflow
 
-1. Download `Mini_Project.json` from this repository  
+1. Download `customer_auto_responde_system.json` from this repository  
 2. Open n8n and click **Import workflow**  
 3. Upload the JSON file  
 4. Create credentials for:
