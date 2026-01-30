@@ -20,6 +20,8 @@ Workflow Image :
 Error handling Workflow Image:
 <img width="1162" height="685" alt="Error_handling_workflow" src="https://github.com/user-attachments/assets/ee769853-4f2e-4558-8b17-e5e403755507" />
 
+Customer Inquiry form:
+<img width="630" height="734" alt="image" src="https://github.com/user-attachments/assets/49a2f289-7a78-411e-8fa4-a8c4de6d224e" />
 
 
 
