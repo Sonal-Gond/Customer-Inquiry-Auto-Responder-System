@@ -17,3 +17,9 @@
 Workflow Image :
 <img width="1683" height="636" alt="Customer_inquire_auto_respond_workflow" src="https://github.com/user-attachments/assets/5af41775-e41c-4594-ad7d-1c74c938c9d4" />
 
+Error handling Workflow Image:
+<img width="1162" height="685" alt="Error_handling_workflow" src="https://github.com/user-attachments/assets/ee769853-4f2e-4558-8b17-e5e403755507" />
+
+
+
+
